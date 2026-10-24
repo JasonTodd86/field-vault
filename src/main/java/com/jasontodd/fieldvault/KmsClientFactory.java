@@ -2,12 +2,18 @@ package com.jasontodd.fieldvault;
 
 import java.net.URI;
 import java.time.Duration;
-
+// AWS software development kit.
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.core.client.config.ClientOverrideConfiguration;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.kms.KmsClient;
+// software.amazon.awssdk:kms from the pom.xml is the wrappper of KMS only
+/* 
+KMS is an HTTPS service. 
+The SDK gives you Java methods like kms.generateDataKey(...), 
+and it handles signing, retries, timeouts, and parsing responses.
+*/
 
 public final class KmsClientFactory {
 
