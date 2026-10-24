@@ -1,0 +1,1 @@
+This is a project to try some encryption and decryption while using Docker and AWS on the backend. 
