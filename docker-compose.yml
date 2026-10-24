@@ -1,0 +1,7 @@
+services:
+  localstack:
+    image: localstack/localstack:4.14 # a fake AWS on my mac w/ only KMS enabled
+    ports:
+      - "4566:4566"
+    environment:
+      SERVICES: kms # only KMS. W/o this, LocalStack starts everything.

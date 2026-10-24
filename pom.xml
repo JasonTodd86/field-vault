@@ -8,5 +8,48 @@
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <aws.sdk.version>2.57.3</aws.sdk.version>
+    <junit.version>6.1.3</junit.version>
   </properties>
+
+  <dependencyManagement> <!--Carries the AWS BOM (bill of materials).
+    The BOM carries matching versions for all AWS/SDK modules so that I
+    can declare the key management service module w/o a version. Without this,
+    I'd have to declare a dependency.-->
+    <dependencies>
+      <dependency>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>bom</artifactId> <!--Import the BOM so every AWS module
+     resolves to a matching version. -->
+        <version>${aws.sdk.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>software.amazon.awssdk</groupId>
+      <artifactId>kms</artifactId><!--The AWS module that holds
+      the master keys. -->
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId><!-- This is the test framework.-->
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope><!--It's only used for tests and isn't shipped
+      with the app.-->
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.3</version>
+      </plugin>
+    </plugins>
+  </build>
 </project>
